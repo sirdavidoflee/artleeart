@@ -1,0 +1,22 @@
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+npm-debug.log
+
+# Ignore other unneeded files.
+*.swp
+*~
+.project
+.idea
+.secret
+.scssc
+.DS_Store
+*/.DS_Store
+/.sass-cache
+node_modules
+node_modules/*
+source/css/sitewide.css.map
+*/sitewide.css.map
+build/
+build/*
+build
