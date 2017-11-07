@@ -1,0 +1,273 @@
+@import "_variables.scss"; // Include all variables for the site like fonts
+@import "_mixins.scss"; // Include the CSS mixins
+@import "_reset.scss"; // Include the general HTML reset
+@import "_keyframes.scss"; // keyframe animations, only include if you'll be using keyframe animations
+
+/* Put all your main styles below here */
+/* When making styles, make sure to keep in mind a mobile-first mentality. All your main code here should work 100% on mobile. Your media queries should be for upscaling from a mobile size.*/
+
+* { box-sizing: border-box; }
+
+header {
+	background: #ebba74;
+	padding: 40px 0;
+	text-align: center;
+	margin: 0 auto 20px;
+	@include box-shadow(inset 0 18px 100px -20px #90570e);
+	
+	nav {
+		font: normal 18px "Sanchez", "Arial", sans-serif;
+		padding: 20px 0 0;
+		
+		li {
+			display: inline-block;
+			padding: 0 12px;
+			position: relative;
+			
+			a {
+				color: #000;
+				position: relative;
+				text-decoration: none;
+				z-index: 2;
+				
+				&:hover {
+					text-decoration: none;
+					
+					&:before {
+						display: none;
+					}
+				}
+			}
+			&:before {
+				background: transparent;
+				bottom: -2px;
+				content: ' ';
+				height: 12px;
+				left: 0;
+				color: #db8414;
+				position: absolute;
+				width: 100%;
+				@include transition(all 0.3s ease-in-out);
+			}
+			&:hover {
+				&:before {
+					background: #db8414;
+					height: 110%;
+				}
+			}
+			
+			&.active {
+				
+				&:before {
+					background: #db8414;
+				}
+			}
+		}
+	}
+}
+
+body {
+	background: #e6e7e9;
+	font: normal 14px "Sanchez", "Arial", sans-serif;
+	position: relative;
+}
+
+h1 {
+	padding: 10px 0 20px;
+	text-align: center;
+}
+p.intro {
+	margin: 0 auto;
+	text-align: center;
+	padding: 0 0 10px;
+	width: 50%;
+	
+	@include mobile {
+		width: auto;
+	}
+}
+a {
+	color: #000;
+	position: relative;
+	text-decoration: underline;
+	
+	&:before {
+		background: transparent;
+		bottom: 0px;
+		content: ' ';
+		height: 1px;
+		position: absolute;
+		width: 100%;
+		@include transition(all 0.2s ease-in-out);
+	}
+	
+	&:hover {
+		text-decoration: underline;
+		
+		&:before {
+			background: #000;
+			bottom: -2px;
+		}
+	}
+}
+
+/* ---- grid ---- */
+
+.featured-work {
+	margin: 0 auto;
+	max-width: 1280px;
+	width: 100%;
+}
+
+.grid {
+	padding: 20px 0;
+	width: 100%;
+}
+
+/* clearfix */
+.grid:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+/* ---- grid-item ---- */
+
+.grid-sizer,
+.grid-item {
+	width: 25%;
+}
+
+.grid-item {
+	height: 200px;
+	float: left;
+	background-color: #F4F3F4;
+	border: 4px solid #e6e7e9;
+	overflow: hidden;
+	position: relative;
+	transform: translateZ(0);
+	
+	@include transition(all 0.35s ease-in-out);
+	
+	@include mobile {
+		height: 130px;
+	}
+	
+	
+	img {
+		display: block;
+		height: auto;
+		left: 50%;
+		position: absolute;
+		top: 50%;
+		width: 100%;
+		
+		@include transform(translate(-50%, -50%));
+		@include transition(all 0.35s ease-in-out);
+		
+		&.portrait {
+			
+		}
+	}
+	.info {
+		background: rgba(0,0,0,0.5);
+		color: #cbcbcb;
+		font: italic normal 16px "Sanchez", "Arial", sans-serif;
+		left: 0;
+		padding: 8px 12px;
+		position: absolute;
+		bottom: -120px;
+		width: 100%;
+		@include transition(all 0.35s ease-in-out);
+		
+		h4 {
+			color: #fff;
+		}
+	}
+	h4 {
+		font-size: 20px;
+		font-style: normal;
+	}
+	
+	&:hover {
+		cursor: pointer;
+		@include filter(saturate(2));
+		-webkit-transform: translateZ(0);
+	
+		img {
+			@include transform(translate(-50%, -50%) scale(1.2));
+		}
+		.info {
+			bottom: 0;
+		}
+	}
+	&.item-opened {
+		width: 80%;
+		height: auto;
+		border: 3px solid #e8e8e8;
+		-webkit-filter: grayscale(0%) blur(0);
+	
+		&:hover {
+			@include filter(none);
+		
+			img {
+				//@include transform(translate(-50%, -50%));
+			}
+			.info {
+				top: 0;
+			}
+		}
+		img {
+			position: static;
+			@include transform(none);
+		}
+		.info {
+			bottom: auto;
+			//font-size: 25px;
+			top: 0;
+			
+			h4 {
+				
+			}
+		}
+	}
+}
+
+.grid-alpha{
+	display: none;
+	position: absolute;
+	background: rgba(244, 243, 244, 0.6);
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	text-align: center;
+	z-index: 10;
+}
+.grid-alpha:hover{
+	cursor: zoom-out;
+}
+
+.grid-item--width2 {
+	width:	50%;
+}
+
+.grid-item--height2 {
+	height: 400px;
+	
+	@include mobile {
+		height: 200px;
+	}
+}
+.grid-item--height3 {
+	height: 600px;
+}
+
+@media only screen and (max-width: 580px){
+	.grid-item{
+		width: 50%;
+	}
+	.grid-item--width2 {
+		width:	100%;
+	}
+}
